@@ -13,7 +13,7 @@ cpf VARCHAR (11) UNIQUE NOT NULL,
 telefone VARCHAR (16)
 );
 
-CREATE TABLE pedido_venda (
+CREATE TABLE id_pedido (
 id_pedido_venda SERIAL PRIMARY KEY,
 id_carro INTEGER NOT NULL,
 id_cliente INTEGER NOT NULL,
@@ -24,20 +24,20 @@ FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 
 SELECT * FROM Carro
 
-INSERT INTO Carro (marca, modelo, ano, cor) VALUES ('Mitsubishi', 'Lancer','2008','vermelho');
-INSERT INTO Carro (marca, modelo, ano, cor) VALUES ('Chevrolet', 'Onix','2022','prata');
-INSERT INTO Carro (marca, modelo, ano, cor) VALUES ('Ford', 'Focus','2008','prata');
-INSERT INTO Carro (marca, modelo, ano, cor) VALUES ('Lotus', 'Evora','2012','branco');
-INSERT INTO Carro (marca, modelo, ano, cor) VALUES ('Ferrari', 'F40','1987','vermelho');
+INSERT INTO Carro (marca, modelo, ano, cor) VALUES (Mitsubishi, Lancer,2008,vermelho);
+INSERT INTO Carro (marca, modelo, ano, cor) VALUES (Chevrolet, Onix,2022,prata);
+INSERT INTO Carro (marca, modelo, ano, cor) VALUES (Ford, Focus,2008,prata);
+INSERT INTO Carro (marca, modelo, ano, cor) VALUES (Lotus, Evora,2012,branco);
+INSERT INTO Carro (marca, modelo, ano, cor) VALUES (Ferrari, F40,1987,vermelho);
 
 
 SELECT * FROM Cliente
 
-INSERT INTO Cliente (nome, cpf, telefone)VALUES ('Cláudio', '03361081092','98324-5821');
-INSERT INTO Cliente (nome, cpf, telefone)VALUES ('Cleber', '59281321076','99435-6932');
-INSERT INTO Cliente (nome, cpf, telefone)VALUES ('Pedro', '76557261088','993454-9843');
-INSERT INTO Cliente (nome, cpf, telefone)VALUES ('Pedro', '72387860532','99163-8211');
-INSERT INTO Cliente (nome, cpf, telefone)VALUES ('Jorge', '46578937421','99114-8900'),
+INSERT INTO Cliente (nome, cpf, telefone)VALUES (Cláudio, 03361081092,983245821);
+INSERT INTO Cliente (nome, cpf, telefone)VALUES (Cleber, 59281321076,994356932);
+INSERT INTO Cliente (nome, cpf, telefone)VALUES (Pedro, 76557261088,9934549843);
+INSERT INTO Cliente (nome, cpf, telefone)VALUES (Pedro, 72387860532,991638211);
+INSERT INTO Cliente (nome, cpf, telefone)VALUES (Jorge, 46578937421,991148900),
 
 SELECT * FROM pedido_venda
 
