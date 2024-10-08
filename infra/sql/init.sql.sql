@@ -48,10 +48,10 @@ INSERT INTO Cliente (nome, cpf, telefone)VALUES
 SELECT * FROM Cliente
 
 INSERT INTO pedido_venda (id_cliente, id_carro, valor_pedido, data_pedido) VALUES
-(1, 1,79722.00, 12/03/24),
-(2, 2,67617.00, 10/01/24),
-(3, 3,27900.00, 24/07/24),
-(4, 4,264979.00, 28/09/24),
-(5, 5,3600000.00, 09/06/24);
+(1, 1, 79722.00, '12/03/2024'),
+(2, 2, 67617.00, '10/01/2024'),
+(3, 3, 27900.00, '24/07/2024'),
+(4, 4, 264979.00, '28/09/2024'),
+(5, 5, 3600000.00, '09/06/2024');
 
 SELECT * FROM pedido_venda
