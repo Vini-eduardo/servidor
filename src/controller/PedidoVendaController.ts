@@ -1,10 +1,9 @@
-
 import { Request, Response } from "express";
 import { PedidoVenda } from "../model/PedidoVenda";
 
 interface PedidoDTO {
-    id_carro: number,
-    id_cliente: number,
+    idCarro: number,
+    idCliente: number,
     data: Date,
     valor: number,
 }
@@ -61,8 +60,8 @@ export class PedidoVendaController extends PedidoVenda {
             const pedidoRecebido: PedidoDTO = req.body;
 
             // instanciando um objeto do tipo Pedido com as informações recebidas
-            const novoPedido = new PedidoVenda(pedidoRecebido.id_carro, 
-                                        pedidoRecebido.id_cliente, 
+            const novoPedido = new PedidoVenda(pedidoRecebido.idCarro, 
+                                        pedidoRecebido.idCliente, 
                                         pedidoRecebido.data, 
                                         pedidoRecebido.valor);
 
@@ -86,7 +85,3 @@ export class PedidoVendaController extends PedidoVenda {
         }
     }
 }
-
-
-
-

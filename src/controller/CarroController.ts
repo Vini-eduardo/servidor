@@ -1,4 +1,4 @@
- import { Request, Response } from "express";
+import { Request, Response } from "express";
 import { Carro } from "../model/Carro";
 
 interface CarroDTO {

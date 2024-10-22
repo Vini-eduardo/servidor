@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { Cliente } from "../model/Cliente";
 
-
 interface ClienteDTO {
     nome: string,
     cpf: string,
