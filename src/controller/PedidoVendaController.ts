@@ -42,7 +42,7 @@ export class PedidoVendaController extends PedidoVenda {
     /**
     * Método controller para cadastrar um novo pedido.
     * 
-    * Esta função recebe uma requisição HTTP contendo os dados de um carro no corpo da requisição
+    * Esta função recebe uma requisição HTTP contendo os dados de um no no corpo da requisição
     * e tenta cadastrar este carro no banco de dados utilizando a função `cadastroPedido`. Caso o cadastro 
     * seja bem-sucedido, retorna uma resposta HTTP 200 com uma mensagem de sucesso. Caso contrário, retorna
     * uma resposta HTTP 400 com uma mensagem de erro.
@@ -56,7 +56,7 @@ export class PedidoVendaController extends PedidoVenda {
     */
     static async novo(req: Request, res: Response): Promise<Response> {
         try {
-            // recuperando informações do corpo da requisição e colocando em um objeto da interface CarroDTO
+            // recuperando informações do corpo da requisição e colocando em um objeto da interface PedidoDTO
             const pedidoRecebido: PedidoDTO = req.body;
 
             // instanciando um objeto do tipo Pedido com as informações recebidas
@@ -85,3 +85,4 @@ export class PedidoVendaController extends PedidoVenda {
         }
     }
 }
+
