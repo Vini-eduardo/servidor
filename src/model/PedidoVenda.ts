@@ -1,3 +1,7 @@
+import { DatabaseModel } from "./DatabaseModel";
+
+const database = new DatabaseModel().pool;
+
 /**
  * Classe que representa um Pedido de Venda.
  */
@@ -121,5 +125,76 @@ export class PedidoVenda {
      */
     public getValor(): number {
         return this.valor;
+    }
+
+
+    /**
+     * Busca e retorna uma lista de pedidos de venda do banco de dados.
+     * @returns Um array de objetos do tipo `PedidoVenda` em caso de sucesso ou `null` se ocorrer um erro durante a consulta.
+     * 
+     * - A função realiza uma consulta SQL para obter todos os registros da tabela "pedido_venda".
+     * - Os dados retornados são utilizados para instanciar objetos da classe `PedidoVenda`.
+     * - Cada pedido de venda instanciado é adicionado a uma lista que será retornada ao final da execução.
+     * - Caso ocorra uma falha na consulta ao banco, a função captura o erro, exibe uma mensagem no console e retorna `null`.
+     */
+    static async listagemPedidos(): Promise<Array<PedidoVenda> | null> {
+        const listaDePedidos: Array<PedidoVenda> = [];
+
+        try {
+            const querySelectPedidos = `SELECT * FROM pedido_venda;`;
+            const respostaBD = await database.query(querySelectPedidos);
+
+            respostaBD.rows.forEach((linha) => {
+                const novoPedidoVenda = new PedidoVenda(
+                    linha.id_carro,
+                    linha.id_cliente,
+                    linha.data_pedido,
+                    parseFloat(linha.valor_pedido)
+                );
+
+                novoPedidoVenda.setIdPedido(linha.id_pedido);
+
+                listaDePedidos.push(novoPedidoVenda);
+            });
+
+            return listaDePedidos;
+        } catch (error) {
+            console.log('Erro ao buscar lista de pedidos');
+            return null;
+        }
+    }
+
+    static async cadastroPedidos(pedido: PedidoVenda): Promise<boolean> {
+        try {
+            // query para fazer insert de um carro no banco de dados
+            const queryInsertPedido = `INSERT INTO Pedido (id_carro, id_cliente, data, valor)
+                                        VALUES
+                                        (${pedido.getIdCarro()}, 
+                                        ${pedido.getIdCliente()}, 
+                                        '${pedido.getData()}', 
+                                        ${pedido.getValor()})
+                                        RETURNING id_pedido;`;
+
+            // executa a query no banco e armazena a resposta
+            const respostaBD = await database.query(queryInsertPedido);
+
+            // verifica se a quantidade de linhas modificadas é diferente de 0
+            if (respostaBD.rowCount != 0) {
+                console.log(`Carro cadastrado com sucesso! ID do pedido: ${respostaBD.rows[0].id_pedido}`);
+                // true significa que o cadastro foi feito
+                return true;
+            }
+            // false significa que o cadastro NÃO foi feito.
+            return false;
+
+            // tratando o erro
+        } catch (error) {
+            // imprime outra mensagem junto com o erro
+            console.log('Erro ao cadastrar o pedido. Verifique os logs para mais detalhes.');
+            // imprime o erro no console
+            console.log(error);
+            // retorno um valor falso
+            return false;
+        }
     }
 }
