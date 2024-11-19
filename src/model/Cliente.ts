@@ -198,4 +198,31 @@ export class Cliente {
             return false;
         }
     }
+    static async removerCliente(idCliente: number): Promise<boolean> {
+        try {
+            // query para fazer delete de um cliente no banco de dados
+            const queryDeleteCliente = `DELETE FROM cliente WHERE id_cliente = ${idCliente}`;
+
+            // executa a query no banco e armazena a resposta
+            const respostaBD = await database.query(queryDeleteCliente);
+
+            // verifica se a quantidade de linhas modificadas é diferente de 0
+            if (respostaBD.rowCount != 0) {
+                console.log(`Cliente removido com sucesso! ID do cliente: ${idCliente}`);
+                // true significa que a removação foi bem sucedida
+                return true;
+            }
+            // false significa que a remoção NÃO foi bem sucedida.
+            return false;
+
+            // tratando o erro
+        } catch (error) {
+            // imprime outra mensagem junto com o erro
+            console.log('Erro ao remover o cliente. Verifique os logs para mais detalhes.');
+            // imprime o erro no console
+            console.log(error);
+            // retorno um valor falso
+            return false;
+        }
+    }
 }

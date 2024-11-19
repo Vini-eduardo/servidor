@@ -222,4 +222,32 @@ export class Carro {
             return false;
         }
     }
+
+    static async removerCarro(idCarro: number): Promise<boolean> {
+        try {
+            // query para fazer delete de um carro no banco de dados
+            const queryDeleteCarro = `DELETE FROM carro WHERE id_carro = ${idCarro}`;
+
+            // executa a query no banco e armazena a resposta
+            const respostaBD = await database.query(queryDeleteCarro);
+
+            // verifica se a quantidade de linhas modificadas é diferente de 0
+            if (respostaBD.rowCount != 0) {
+                console.log(`Carro removido com sucesso! ID do carro: ${idCarro}`);
+                // true significa que a removação foi bem sucedida
+                return true;
+            }
+            // false significa que a remoção NÃO foi bem sucedida.
+            return false;
+
+            // tratando o erro
+        } catch (error) {
+            // imprime outra mensagem junto com o erro
+            console.log('Erro ao remover o carro. Verifique os logs para mais detalhes.');
+            // imprime o erro no console
+            console.log(error);
+            // retorno um valor falso
+            return false;
+        }
+    }
 }

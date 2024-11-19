@@ -197,4 +197,31 @@ export class PedidoVenda {
             return false;
         }
     }
+    static async removerPedido(idPedido: number): Promise<boolean> {
+        try {
+            // query para fazer delete de um pedido no banco de dados
+            const queryDeletePedido = `DELETE FROM pedido_venda WHERE id_pedido = ${idPedido}`;
+
+            // executa a query no banco e armazena a resposta
+            const respostaBD = await database.query(queryDeletePedido);
+
+            // verifica se a quantidade de linhas modificadas é diferente de 0
+            if (respostaBD.rowCount != 0) {
+                console.log(`Pedido removido com sucesso! ID do pedido: ${idPedido}`);
+                // true significa que a removação foi bem sucedida
+                return true;
+            }
+            // false significa que a remoção NÃO foi bem sucedida.
+            return false;
+
+            // tratando o erro
+        } catch (error) {
+            // imprime outra mensagem junto com o erro
+            console.log('Erro ao remover o pedido. Verifique os logs para mais detalhes.');
+            // imprime o erro no console
+            console.log(error);
+            // retorno um valor falso
+            return false;
+        }
+    }
 }
